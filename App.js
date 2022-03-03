@@ -21,11 +21,12 @@ export default class FreakingMath extends Component {
 
   initMath() {
     this.stopLoop();
-    const list_oparetors_easy = ['+', '-','*','/'];
-    const one = Math.floor(Math.random() * 10);
+    const list_oparetors_easy = ['+', '-','*','/'];// list of operator has in this game
+    const one = Math.floor(Math.random() * 10);// get random 2 number
     const two = Math.floor(Math.random() * 10);
-    const operator = list_oparetors_easy[Math.floor(Math.random() * list_oparetors_easy.length)];
-    const result = eval('one ' + operator + ' two');
+    const operator = list_oparetors_easy[Math.floor(Math.random() * list_oparetors_easy.length)];// get random 1 operators in list
+    const result = eval('one ' + operator + ' two');// real result
+    // result_show is result (fake) will show on creen
     const result_show = eval('result '+ list_oparetors_easy[Math.floor(Math.random() * list_oparetors_easy.length)] + ' Math.floor(Math.random() * 2)');
     this.setState({
       math: '' + one + operator + two + ' = ' + result_show,
@@ -46,10 +47,10 @@ export default class FreakingMath extends Component {
           this.setState({timeCounter: Dimensions.get('window').width});
           this.onTimeover();
           this.stopLoop();
-          this.setState({score: -1});
+          this.setState({score: 0});
         };
       }
-    }, 1000);
+    }, 500);
     this.setState({loop: [...this.state.loop, loop]});
   }
 
@@ -87,8 +88,8 @@ export default class FreakingMath extends Component {
         <FlashScreen initMath={this.initMath}/>
         <View style={{flex: 3, backgroundColor: 'powderblue'}}>
           <View ref="timeCounter" style={{width: this.state.timeCounter,height: 35, marginTop: 50, backgroundColor: 'green'}}>
-            <Text style={{fontSize:30, color: 'white'}}>{this.state.score}</Text>
           </View>
+          <Text style={{fontSize:30, color: 'white'}}>Score : {this.state.score}</Text>
           <View style={{height: 100, marginVertical: 180, marginHorizontal: 10}}>
             <Text style={{fontSize:50, color: 'white', textAlign: 'center'}} ref="math">{this.state.math}</Text>
           </View>
@@ -97,12 +98,12 @@ export default class FreakingMath extends Component {
           <TouchableHighlight
             style={{flexGrow: 1, alignSelf: 'stretch', justifyContent: 'center', alignItems: 'center'}}
             onPress={() => this.onPressTouchableHighlight(true)}>
-            <Text style={{fontSize:24, color: 'white'}}>True</Text>
+            <Text style={{fontSize:24, color: 'green'}}>True</Text>
           </TouchableHighlight>
           <TouchableHighlight
             style={{flexGrow: 1, alignSelf: 'stretch', justifyContent: 'center', alignItems: 'center'}}
             onPress={() => this.onPressTouchableHighlight(false)}>
-            <Text style={{fontSize:24, color: 'white'}}>False</Text>
+            <Text style={{fontSize:24, color: 'red'}}>False</Text>
           </TouchableHighlight>
         </View>
       </View>
